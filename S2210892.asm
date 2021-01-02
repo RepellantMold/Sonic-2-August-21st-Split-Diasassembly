@@ -3,27 +3,27 @@
 ; "Sonic The Hedgehog 2 (Aug 21, 1992) (hidden-palace.org).bin" Rom by drx (http://www.hidden-palace.org/)
 ;
 ;
-; Object 51 Skyhorse from Simon Wai exists but is not referenced.
-; Object 52 BFish from Simon Wai exists but is not referenced.
+; Object 51 Skyhorse from Simon Wai, not referenced.
+; Object 52 BFish from Simon Wai, not referenced.
 ;
 ; Rhinobot graphics were edited to use another palette
 ; $29556 ->  move.b  (Offset_0x000040).w, $000E(A1) -> Incorrect reference ( Obj_0x9E.asm )
 ;
-; Object do Title Card faz referência ao mapeamento do Oval e Final Zone do Sonic 1
+; Object of Title Card faz references the mapping of Oval and Final Zone of Sonic 1
 
 
 ; $01F8F0 -> "Spinning Ball", Graphics need to be at $98C0 in VRAM
-; $020E90 -> "Bubble Monster", Graphics need to be at $9F20 in VRAM
+; $020E90 -> "Bubbler's Mother", Graphics need to be at $9F20 in VRAM
 ; $021458 -> "Blink", Graphics need to be at $9C20 in VRAM
-; $022BBC -> Parte do Object do chefe da CPz, Gráficos devem ser carregados no endereço $8C00 da VRAM
+; $022BBC -> Part of the boss' object on CPz, Graphics must be loaded to VRAM address $8C00
 
 ; $02EA24 -> Unused data block referencing enemy data such as
 ;             Blink, Bubble Monster, Crawl, Crocobot, BFish, Spinning Ball
 
-; $02EDFE á $02FFFF -> Data that matches Sonic 2 Simon Wai
+; $02EDFE - $02FFFF -> Data that matches Sonic 2 Simon Wai
 
-; $04B87C á $04C000 -> Dados sobreescritos dos Tiles da Star Light do Sonic 1
-; $04ED28 á $04FFFF -> Dados sobreescritos dos Chunks da Star Light do Sonic 1
+; $04B87C - $04C000 -> Overwritten data of Sonic 1's Star Light Tiles
+; $04ED28 - $04FFFF -> Overwritten data of  Sonic 1's Star Light Chunks
 
 ; $078282 -> Unused fireball (Nemesis).
 ; $07BB2A -> Blue box that is slightly different from the final version used in Casino Night (Nemesis).
@@ -35,29 +35,30 @@
 ; $082986 -> "Motobug", not used (Nemesis).
 ; $082B82 -> "Crawl" - slightly different from the final version used in Casino Night (Nemesis).
 ;             Graphics of the enemy "Crawl" are different from Sonic 2 Simon Wai.
-; $08561E -> Chefe na Neo Green HIll. Dados gráficos diferentes da versão 14/09/1992 ( Arte no formato Nemesis ).
-; $087DE0 -> Chefe na Oil Ocean. Dados gráficos diferentes da versão 14/09/1992 ( Arte no formato Nemesis ).
-; $089B6A -> Inimigo "Nebula", não usado ( Arte no formato Nemesis ). 
-; $089D8A -> Inimigo "Turtloid", não usado ( Arte no formato Nemesis ).   
-; $08A686 -> Inimigo "Flasher". Dados gráficos diferentes da versão 14/09/1992 ( Arte no formato Nemesis ).
-; $08B428 -> Inimigo "Clucker", não usado ( Arte no formato Nemesis ).   
-; $08B662 -> Inimigo "Balkiry", não usado ( Arte no formato Nemesis ).
-; $091224 -> Gráficos de inicialização para os tiles dinâmicos da fase Hill Top, não usado ( Arte no formato Nemesis ).
-; $091224 -> Gráficos de inicialização para os tiles dinâmicos da fase Metropolis, não usado ( Arte no formato Nemesis ).
-; $0A67C2 -> Gráficos de inicialização para os tiles dinâmicos da fase Hidden Palace, não usado ( Arte no formato Nemesis ).
-; $0AC7A8 -> Gráficos de inicialização para os tiles dinâmicos da fase Oil Ocean, não usado ( Arte no formato Nemesis ).
-; $0B9E78 -> Gráficos de inicialização para os tiles dinâmicos da fase Casino Night, não usado ( Arte no formato Nemesis ).
-;             Gráficos de inicialização diferentes da versão conhecida como Sonic 2 Beta
-; $0C0F7A -> Gráficos de inicialização para os tiles dinâmicos da fase Chemical Plant, não usado ( Arte no formato Nemesis ).
-; $0CA426 -> Gráficos de inicialização para os tiles dinâmicos da fase Neo Green Hill, não usado ( Arte no formato Nemesis ).
+; $08561E -> Neo Green Hill's boss. Graphic data is different than the September 14th version. (Nemesis).
+; $087DE0 -> Oil Ocean's boss. Graphic data is different than the September 14th version. (Nemesis).
+; $089B6A -> "Nebula" enemy isn't used (Nemesis).
+; $089D8A -> "Turtloid" enemy isn't used (Nemesis).
+; $08A686 -> "Flasher". Graphic data is different than the September 14th version. (Nemesis).
+; $08B428 -> "Clucker", unused enemy (Art in Nemesis format).   
+; $08B662 -> "Balkiry", unused enemy (Art in Nemesis format).
+; $091224 -> Hill Top's dynamic tiles (Nemesis - Unused).
+; $091224 -> Metropolis' dynamic tiles (Nemesis - Unused).
+
+; $0A67C2 -> Hidden Palacce's dynamic tiles (Nemesis - Unused).
+; $0AC7A8 -> Oil Ocean's dynamic tiles (Nemesis - Unused).
+; $0B9E78 -> Casino Night's dynamic tiles (Nemesis - Unused).
+;             Boot graphics are different than Sonic 2 Beta's
+; $0C0F7A -> Chemical Plant's dynamic tiles (Nemesis - Unused).
+; $0CA426 -> Neo Green Hill's dynamic tiles (Nemesis - Unused).
 ;-------------------------------------------------------------------------------
-Offset_0x000040 equ $0040 ; Referencia incorreta no crawton ( Obj_0x9E.asm )
+Offset_0x000040 equ $0040 ; Referenced incorrectly ( Obj_0x9E.asm )
 ;-------------------------------------------------------------------------------
                 include 'vars.asm'
                 include 'macros.asm'
                 
 		org 0
-                                               
+; Start of ROM
                 dc.l    StackPointer            ; Initial stack pointer value
                 dc.l    ROM_Prog_Start          ; Start of our program in ROM
                 dc.l    BusError                ; Bus error
@@ -121,7 +122,7 @@ Offset_0x000040 equ $0040 ; Referencia incorreta no crawton ( Obj_0x9E.asm )
                 dc.l    ErrorTrap               ; Unused (reserved)
                 dc.l    ErrorTrap               ; Unused (reserved)
                 dc.l    ErrorTrap               ; Unused (reserved)
-                dc.l    ErrorTrap               ; Unused (reserved)   
+                dc.l    ErrorTrap               ; Unused (reserved)
 ;Console:
                 dc.b    'SEGA MEGA DRIVE '
 ;Date:
@@ -157,7 +158,7 @@ ErrorTrap:                                                     ; Offset_0x000200
                 bra.s   ErrorTrap                              ; Offset_0x000200
 ROM_Prog_Start:                                                ; Offset_0x000206
                 tst.l   (IO_Port_0_Control)                          ; $00A10008
-                bne.s   PortA_OK                               ; Offset_0x000214                                         
+                bne.s   PortA_OK                               ; Offset_0x000214
                 tst.w   (IO_Expansion_Control)                       ; $00A1000C
 PortA_OK:                                                      ; Offset_0x000214
                 bne.s   PortC_OK                               ; Offset_0x000292                                         
@@ -167,7 +168,7 @@ PortA_OK:                                                      ; Offset_0x000214
                 move.b  -$10FF(A1), D0
                 andi.b  #$0F, D0
                 beq.s   SkipSecurity                           ; Offset_0x000234                                         
-                move.l  #'SEGA', $2F00(A1)                                   
+                move.l  #'SEGA', $2F00(A1)
 SkipSecurity:                                                  ; Offset_0x000234
                 move.w  (A4), D0                                                
                 moveq   #$00, D0                                                
@@ -176,7 +177,7 @@ SkipSecurity:                                                  ; Offset_0x000234
                 moveq   #$17, D1                                                
 VDPInitLoop:                                                   ; Offset_0x00023E
                 move.b  (A5)+, D5                                               
-                move.w  D5, (A4)                                                
+                move.w  D5, (A4)
                 add.w   D7, D5                                                  
                 dbra    D1, VDPInitLoop                        ; Offset_0x00023E
                 move.l  (A5)+, (A4)                                             
@@ -287,9 +288,9 @@ Game_Program:                                                  ; Offset_0x000300
 ChecksumCheck:                                                 ; Offset_0x00031C
                 move.l  #ErrorTrap, A0                               ; $00000200                                        
                 move.l  #ROM_End, A1                                 ; $000001A4                                      
-                move.l  (A1), D0                                                
+                move.l  (A1), D0
                 move.l  #$0007FFFF, D0                                          
-                moveq   #$00, D1                                                
+                moveq   #$00, D1
 ChksumChkLoop:                                                 ; Offset_0x000332
                 add.w   (A0)+, D1
                 cmp.l   A0, D0                                                  
@@ -297,8 +298,8 @@ ChksumChkLoop:                                                 ; Offset_0x000332
                 move.l  #ROM_Checksum, A1                                          
                 cmp.w   (A1), D1
                 nop
-                nop                                                             
-                lea     ($FFFFFE00).w, A6                                       
+                nop
+                lea     ($FFFFFE00).w, A6
                 moveq   #$00, D7                                                
                 move.w  #$007F, D6                                              
 ClearSomeRAMLoop:                                              ; Offset_0x00034E
@@ -321,7 +322,7 @@ ClearRemainingRAMLoop:                                         ; Offset_0x000376
                 move.b  #gm_TitleScreen, (Game_Mode).w          ; $00, $FFFFF600
 MainGameLoop:                                                  ; Offset_0x00038E
                 move.b  (Game_Mode).w, D0                            ; $FFFFF600
-                andi.w  #$001C, D0                                              
+                andi.w  #$1C, D0                                              
                 jsr     GameModeArray(PC, D0)                  ; Offset_0x00039C                               
                 bra.s   MainGameLoop                           ; Offset_0x00038E                                                         
 GameModeArray:                                                 ; Offset_0x00039C
