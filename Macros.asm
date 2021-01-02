@@ -17,15 +17,8 @@ align:	macro
 
 stopZ80:	macro
 		move.w	#$100,(Z80_Bus_Request).l
-		endm
-
-; ---------------------------------------------------------------------------
-; wait for Z80 to stop
-; ---------------------------------------------------------------------------
-
-waitZ80:	macro
-	@wait:	btst	#0,(Z80_Bus_Request).l
-		bne.s	@wait
+	.wait:	btst	#0,(Z80_Bus_Request).l
+		bne.s	.wait
 		endm
 
 ; ---------------------------------------------------------------------------
@@ -65,14 +58,23 @@ enable_ints:	macro
 		endm
 
 ; ---------------------------------------------------------------------------
-; bankswitch between SRAM and ROM
-; (remember to enable SRAM in the header first!)
+; VDP Stuff
 ; ---------------------------------------------------------------------------
 
-gotoSRAM:	macro
-		move.b  #1,($A130F1).l
-		endm
-
-gotoROM:	macro
-		move.b  #0,($A130F1).l
-		endm
+SetGfxMode:	macro mode
+	   	move.w  #VDPREG_MODE4|(mode), (VDP_Control_Port)
+    		endm
+    		
+   		; tells the VDP to fill a region of VRAM with a certain byte
+dmaFillVRAM macro byte,addr,length
+	lea	(VDP_control_port).l,a5
+	move.w	#VDPREG_INCR+1,(a5) ; VRAM pointer increment: $0001
+	move.l	#((VDPREG_DMALEN_H|((((length)-1)&$FF00)>>8))<<16)|($9300|(((length)-1)&$FF)),(a5) ; DMA length ...
+	move.w	#VDPREG_DMASRC_H+$80,(a5) ; VRAM fill
+	move.l	#$40000080|(((addr)&$3FFF)<<16)|(((addr)&$C000)>>14),(a5) ; Start at ...
+	move.w	#(byte)<<8,(VDP_data_port).l ; Fill with byte
+.loop:	move.w	(a5),d1
+	btst	#1,d1
+	bne.s	.loop ; busy loop until the VDP is finished filling...
+	move.w	#VDPREG_INCR+2,(a5) ; VRAM pointer increment: $0002
+    endm

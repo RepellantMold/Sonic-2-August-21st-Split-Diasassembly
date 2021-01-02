@@ -294,5 +294,53 @@ Hardware_Id                    equ M68K_RAM_Start+$FFF8
 Debug_Mode_Active_Flag         equ M68K_RAM_Start+$FFFA 
 Init_Flag                      equ M68K_RAM_Start+$FFFC
 
-; CRAM
+; ---------------------------------------------------------------------------
+; VRAM and tile art base addresses.
+; VRAM Reserved regions.
+VRAM_Plane_A_Name_Table                  = $C000	; Extends until $CFFF
+VRAM_Plane_B_Name_Table                  = $E000	; Extends until $EFFF
+VRAM_Plane_A_Name_Table_2P               = $A000	; Extends until $AFFF
+VRAM_Plane_B_Name_Table_2P               = $8000	; Extends until $8FFF
+VRAM_Plane_Table_Size                    = $1000	; 64 cells x 32 cells x 2 bytes per cell
+VRAM_Sprite_Attribute_Table              = $F800	; Extends until $FA7F
+VRAM_Sprite_Attribute_Table_Size         = $0280	; 640 bytes
+VRAM_Horiz_Scroll_Table                  = $FC00	; Extends until $FF7F
+VRAM_Horiz_Scroll_Table_Size             = $0380	; 224 lines * 2 bytes per entry * 2 PNTs
+
+; VDP
 Color_RAM_Address              equ $C0000000
+VRAM_ADDR_CMD:  equ $40000000
+VSRAM_ADDR_CMD: equ $40000010
+
+VDPREG_MODE1:     equ $8000  ; Mode register #1
+VDPREG_MODE2:     equ $8100  ; Mode register #2
+VDPREG_MODE3:     equ $8B00  ; Mode register #3
+VDPREG_MODE4:     equ $8C00  ; Mode register #4
+
+VDPREG_PLANEA:    equ $8200  ; Plane A table address
+VDPREG_PLANEB:    equ $8400  ; Plane B table address
+VDPREG_SPRITE:    equ $8500  ; Sprite table address
+VDPREG_WINDOW:    equ $8300  ; Window table address
+VDPREG_HSCROLL:   equ $8D00  ; HScroll table address
+
+VDPREG_SIZE:      equ $9000  ; Plane A and B size
+VDPREG_WINX:      equ $9100  ; Window X split position
+VDPREG_WINY:      equ $9200  ; Window Y split position
+VDPREG_INCR:      equ $8F00  ; Autoincrement
+VDPREG_BGCOL:     equ $8700  ; Background color
+VDPREG_HRATE:     equ $8A00  ; HBlank interrupt rate
+
+VDPREG_DMALEN_L:  equ $9300  ; DMA length (low)
+VDPREG_DMALEN_H:  equ $9400  ; DMA length (high)
+VDPREG_DMASRC_L:  equ $9500  ; DMA source (low)
+VDPREG_DMASRC_M:  equ $9600  ; DMA source (mid)
+VDPREG_DMASRC_H:  equ $9700  ; DMA source (high)
+
+GFXMODE_256x224:      equ %00000000
+GFXMODE_320x224:      equ %10000001
+GFXMODE_256x448:      equ %00000110
+GFXMODE_320x448:      equ %10000111
+GFXMODE_256x224_SH:   equ %00001000
+GFXMODE_320x224_SH:   equ %10001001
+GFXMODE_256x448_SH:   equ %00001110
+GFXMODE_320x448_SH:   equ %10001111
