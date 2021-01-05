@@ -11,7 +11,7 @@
 Offset_0x0223D6:
                 dc.w    Offset_0x0223E2-Offset_0x0223D6
                 dc.w    Offset_0x022440-Offset_0x0223D6
-                dc.w    Offset_0x022464-Offset_0x0223D6      
+                dc.w    Offset_0x022464-Offset_0x0223D6
 ;------------------------------------------------------------------------------- 
 Offset_0x0223DC:
                 dc.w    $0000, $FCE0, $FD1C              
@@ -45,18 +45,18 @@ Offset_0x022440:
                 move.b  Obj_Routine_2(A0), D0                            ; $0025
                 move.w  Offset_0x022460(PC, D0), D1
                 jsr     Offset_0x022460(PC, D1)
-                bra     Jmp_21_To_MarkObjGone                  ; Offset_0x02261E    
+                bra     Jmp_21_To_MarkObjGone                  ; Offset_0x02261E
 ;-------------------------------------------------------------------------------  
 Offset_0x022460:
                 dc.w    Offset_0x022478-Offset_0x022460
-                dc.w    Offset_0x02248E-Offset_0x022460  
+                dc.w    Offset_0x02248E-Offset_0x022460
 ;-------------------------------------------------------------------------------     
 Offset_0x022464:
                 bsr     Offset_0x0221A0
                 bsr     Jmp_13_To_SpeedToPos                   ; Offset_0x022630
                 lea     Aquis_Animate_Data(PC), A1             ; Offset_0x022244
                 bsr     Jmp_0F_To_AnimateSprite                ; Offset_0x022624
-                bra     Jmp_21_To_MarkObjGone                  ; Offset_0x02261E   
+                bra     Jmp_21_To_MarkObjGone                  ; Offset_0x02261E
 ;-------------------------------------------------------------------------------  
 Offset_0x022478:
                 bsr     Jmp_13_To_SpeedToPos                   ; Offset_0x022630

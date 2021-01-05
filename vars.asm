@@ -1,10 +1,10 @@
 ; Constants
 
-gm_SEGALogo                    equ $00
-gm_TitleScreen                 equ $04
-gm_DemoMode                    equ $08
-gm_PlayMode                    equ $0C
-gm_SpecialStage                equ $10 
+gm_SEGALogo:			equ ptr_GM_Sega-GameModeArray	; $00
+gm_TitleScreen:			equ ptr_GM_Title-GameModeArray	; $04
+gm_DemoMode:			equ ptr_GM_Demo-GameModeArray	; $08
+gm_PlayMode:			equ ptr_GM_Level-GameModeArray	; $0C
+gm_SpecialStage:		equ ptr_GM_Special-GameModeArray; $10
 gm_Continue                    equ $14
 
 Obj_Id                         equ $00
@@ -118,6 +118,8 @@ CNz_L_Catcher_Fall_Y           equ $3A
 
 Obj_Page_Size_2P               equ $0C
 
+Obj_Size                       equ $40
+
 ; Level Select Text
 _0 = $00
 _1 = $01
@@ -185,10 +187,10 @@ Obj_Memory_Address             equ M68K_RAM_Start+$B000
 Player_One                     equ Obj_Memory_Address
 Player_One_Position_X          equ Player_One+Obj_X
 Player_One_Position_Y          equ Player_One+Obj_Y
-Player_Two                     equ Obj_Memory_Address+$0040
+Player_Two                     equ Obj_Memory_Address+Obj_Size
 Player_Two_Position_X          equ Player_Two+Obj_X
 Player_Two_Position_Y          equ Player_Two+Obj_Y
-Title_Card_RAM_Obj_Data        equ Obj_Memory_Address+$0080
+Title_Card_RAM_Obj_Data        equ Obj_Memory_Address+Obj_Size+Obj_Size
 HUD_RAM_Obj_Data               equ Obj_Memory_Address+$0380
 Level_Results_RAM_Obj_Data     equ Obj_Memory_Address+$05C0
 
@@ -215,7 +217,7 @@ Camera_Y_x4                    equ M68K_RAM_Start+$EE0C
 Camera_Y_x4_Mod_10             equ M68K_RAM_Start+$EE14 
 Camera_X_x8                    equ M68K_RAM_Start+$EE10 
 Camera_X_x4                    equ M68K_RAM_Start+$EE18
-Camera_Y_x4_Mod_10_2           equ M68K_RAM_Start+$EE1C 
+Camera_Y_x4_Mod_10_2           equ M68K_RAM_Start+$EE1C
 Camera_X_2                     equ M68K_RAM_Start+$EE20 
 Camera_Y_2                     equ M68K_RAM_Start+$EE24
 Scroll_Flag_Array              equ M68K_RAM_Start+$EE50
@@ -308,7 +310,7 @@ VRAM_Horiz_Scroll_Table                  = $FC00	; Extends until $FF7F
 VRAM_Horiz_Scroll_Table_Size             = $0380	; 224 lines * 2 bytes per entry * 2 PNTs
 
 ; VDP
-Color_RAM_Address              equ $C0000000
+Color_RAM_Address equ $C0000000
 VRAM_ADDR_CMD:  equ $40000000
 VSRAM_ADDR_CMD: equ $40000010
 
